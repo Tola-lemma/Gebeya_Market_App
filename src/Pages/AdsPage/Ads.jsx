@@ -2,7 +2,7 @@ import React from 'react'
 
 const Ads  = () =>{
   return (
-    <div>Welcome To Ads Page</div>
+    <div style={{fontFamily:"Alfa Slab One"}}><h1>Welcome To Ads Page</h1></div>
   )
 }
 
