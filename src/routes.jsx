@@ -4,7 +4,7 @@ import { CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { colors, NAME } from "./Constants/constant";
 import { ErrorProvider } from "./Components/ToastError/ErrorContext";
-const Home = lazy(()=>import('./Pages/Home'))
+const Home = lazy(()=>import('./Pages/MainHome/Home'))
 const containerStyle = {
       position: "fixed",
       zIndex: 10000,
@@ -12,7 +12,7 @@ const containerStyle = {
       bottom: 0,
       left: 0,
       right: 0,
-      background: colors.background.primary,
+      background: colors.background.pureWhite,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -39,7 +39,7 @@ const containerStyle = {
                   fontWeight: "bold",
                   fontFamily: "Campton",
                   letterSpacing: "1px",
-                  color: colors.background.tertiary
+                  color: colors.background.primary
                 }}
               >
                 {NAME}
