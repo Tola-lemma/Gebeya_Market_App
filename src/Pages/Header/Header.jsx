@@ -18,16 +18,20 @@ import logoImg from "../../Assets/image-removebg-preview.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { colors } from "../../Constants/constant";
 import shopingIcon from "../../Assets/Frame 24.png";
-import { KeyboardArrowDown, Person, Search } from "@mui/icons-material";
+import { KeyboardArrowDown, Person, Search, Close } from "@mui/icons-material";
 import UnitedKingdom from "../../Assets/united kingdom.png";
 const style = {
   p: 0,
-  width: '100%',
-  borderColor: 'divider',
+  width: "100%",
+  borderColor: "divider",
 };
 const HeaderPage = () => {
   const [moreAnchorEl, setMoreAnchorEl] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
   // Handlers for "More" dropdown
   const handleOpenMoreMenu = (event) => {
     setMoreAnchorEl(event.currentTarget);
@@ -37,32 +41,78 @@ const HeaderPage = () => {
     setMoreAnchorEl(null);
   };
 
-  const moreMenuItems = ["Perfumes", "Jewelries", "Gym Wears","Vintage Wears","Sport Wears","Pyjamas","Slippers"];
+  const moreMenuItems = [
+    "Perfumes",
+    "Jewelries",
+    "Gym Wears",
+    "Vintage Wears",
+    "Sport Wears",
+    "Pyjamas",
+    "Slippers",
+  ];
 
   return (
     <AppBar
       position="sticky"
       sx={{
         backgroundColor: colors.background.pureWhite,
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.01)",
+        boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.01)",
         color: colors.background.black,
       }}
     >
-      <StyledToolbar>
+      <StyledToolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         {/* Logo */}
-        <MenuIcon sx={{ display: { xs: "block", sm: "none" } }} />
-        <StyledImage src={logoImg} />
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <IconButton
+            onClick={toggleMenu}
+            sx={{
+              display: { xs: "block", sm: "block", lg: "none", md: "block" },
+            }}
+          >
+            {menuOpen ? <Close /> : <MenuIcon />}
+          </IconButton>
+          {/* Logo */}
+          <StyledImage src={logoImg} />
+        </Box>
 
         {/* Register/Sign In */}
-        <Box sx={{ display: "flex", alignItems: "center", ml: "auto", mr: 4 }}>
+        <Box
+          // sx={{ display: "flex", alignItems: "center", ml: "auto", mr: 4 }}
+          sx={{
+            ml: { lg: 4 },
+            display: { xs: "none", lg: "flex", xl: "flex" },
+            flexDirection: { xs: "row", sm: "row" },
+            alignItems: { lg: "center", sm: "flex-start", xs: "flex-start" },
+            // gap: { xs: 2, sm: 0 },
+          }}
+        >
           <Person />
-          <Typography ml={1} fontSize={16}>
+          <Typography ml={{ lg: 1 }} fontSize={{ lg: 16 }}>
             Register/Sign In
           </Typography>
-          <KeyboardArrowDown sx={{ mr: 2 }} />
+          <KeyboardArrowDown sx={{ mr: { lg: 2 } }} />
         </Box>
         {/* Horizontal Navigation */}
-        <Box sx={{ display: "flex", alignItems: "center", ml: 4 }}>
+        <Box
+          sx={{
+            ml: 4,
+            display: {
+              xs: "none",
+              // sm: menuOpen &&"flex",
+              lg: "flex",
+              xl: "flex",
+            },
+            flexDirection: { xs: "column", sm: "column", lg: "row", md: "row" },
+            alignItems: { lg: "center", sm: "flex-start", xs: "flex-start" },
+            gap: { xs: 1, sm: 0, md: 0 },
+          }}
+        >
           {/* Pages */}
           {["Home", "Men", "Women", "Kids", "Accessories"].map(
             (page, index) => (
@@ -114,11 +164,11 @@ const HeaderPage = () => {
           >
             {moreMenuItems.map((item, index) => (
               <MenuItem key={index} onClick={handleCloseMoreMenu}>
-                 <List sx={style}>
-                <ListItem>
-                  <ListItemText primary= {item} />
-                </ListItem>
-                <Divider component="li" />
+                <List sx={style}>
+                  <ListItem>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                  <Divider component="li" />
                 </List>
               </MenuItem>
             ))}
@@ -133,7 +183,7 @@ const HeaderPage = () => {
             border: "1px solid #C6C6C6",
             borderRadius: "50px",
             overflow: "hidden",
-            ml: 4,
+            ml: { lg: 4 },
           }}
         >
           <Box sx={{ padding: "0 8px", color: "#1E1E1E" }}>
@@ -144,7 +194,7 @@ const HeaderPage = () => {
             sx={{
               flex: 1,
               fontSize: "16px",
-              fontFamily: "sans-serif",
+              fontFamily: "poppins",
               padding: "4px 8px",
               color: "#1E1E1E",
             }}
@@ -163,11 +213,21 @@ const HeaderPage = () => {
 
         {/* Currency and Shopping Cart */}
         <Box sx={{ display: "flex", alignItems: "center", ml: 4 }}>
-          <StyledImage src={UnitedKingdom} height={24} width={24} />
-          <Typography ml={1} fontSize={16}>
-            EN/Currency
-          </Typography>
-          <KeyboardArrowDown sx={{ mr: 2 }} />
+          <Box
+            sx={{
+              ml: 4,
+              display: { xs: "none", lg: "flex", xl: "flex" },
+              flexDirection: { xs: "row", sm: "row" },
+              alignItems: { lg: "center", sm: "flex-start", xs: "flex-start" },
+              gap: { xs: 2, sm: 0 },
+            }}
+          >
+            <StyledImage src={UnitedKingdom} height={24} width={24} />
+            <Typography ml={1} fontSize={16}>
+              EN/Currency
+            </Typography>
+            <KeyboardArrowDown sx={{ mr: 2 }} />
+          </Box>
           <Badge
             badgeContent={2}
             sx={{
@@ -183,6 +243,106 @@ const HeaderPage = () => {
           </Badge>
         </Box>
       </StyledToolbar>
+      {/* Mobile Menu Section: Expands Only When Toggled */}
+      {menuOpen && (
+        <Box
+          sx={{
+            display: { xs: "flex", lg: "none" },
+            flexDirection: "column",
+            alignItems: "flex-start",
+            backgroundColor: colors.background.pureWhite,
+            width: "100%",
+            padding: 2,
+          }}
+        >
+          {/* Register/Sign In */}
+          <Box
+            // sx={{ display: "flex", alignItems: "center", ml: "auto", mr: 4 }}
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "row", sm: "row" },
+              borderBottom: "2px solid #E0E0E0",
+              alignItems: { lg: "center", sm: "flex-start", xs: "flex-start" },
+              // gap: { xs: 2, sm: 0 },
+            }}
+          >
+            <Person />
+            <Typography ml={{ lg: 1 }} fontSize={{ lg: 16 }}>
+              Register/Sign In
+            </Typography>
+            <KeyboardArrowDown sx={{ mr: { lg: 1 } }} />
+            <hr />
+          </Box>
+          {["Our Categories", "Men", "Women", "Kids", "Accessories"].map(
+            (page, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  color: colors.background.black,
+                  padding: "2px 0",
+                }}
+              >
+                {page}
+              </Typography>
+            )
+          )}
+
+          {/* "More" Dropdown */}
+          <Typography
+            variant="body1"
+            sx={{
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+            }}
+            onMouseEnter={handleOpenMoreMenu}
+          >
+            More
+            <KeyboardArrowDown sx={{ marginLeft: "5px" }} />
+          </Typography>
+
+          {/* Dropdown Menu for "More" */}
+          <Menu
+            anchorEl={moreAnchorEl}
+            open={Boolean(moreAnchorEl)}
+            onClose={handleCloseMoreMenu}
+            MenuListProps={{
+              onMouseLeave: handleCloseMoreMenu,
+            }}
+            PaperProps={{
+              elevation: 3,
+              sx: { mt: 1 },
+            }}
+          >
+            {moreMenuItems.map((item, index) => (
+              <MenuItem key={index} onClick={handleCloseMoreMenu}>
+                <List sx={style}>
+                  <ListItem>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                  <Divider component="li" />
+                </List>
+              </MenuItem>
+            ))}
+          </Menu>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "row", sm: "row" },
+              alignItems: { sm: "flex-start", xs: "flex-start" },
+              borderTop: "2px solid #E0E0E0",
+              // gap: { xs: 2, sm: 0 },
+            }}
+          >
+            <StyledImage src={UnitedKingdom} height={24} width={24} />
+            <Typography fontSize={16}>EN/Currency</Typography>
+            <KeyboardArrowDown />
+          </Box>
+        </Box>
+      )}
     </AppBar>
   );
 };
