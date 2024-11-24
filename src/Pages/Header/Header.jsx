@@ -68,7 +68,7 @@ const HeaderPage = () => {
         }}
       >
         {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center",borderBottom: menuOpen ? "1px solid #E0E0E0" : "none", }}>
           <IconButton
             onClick={toggleMenu}
             sx={{
@@ -194,7 +194,7 @@ const HeaderPage = () => {
             sx={{
               flex: 1,
               fontSize: "16px",
-              fontFamily: "poppins",
+              fontFamily: "Poppins",
               padding: "4px 8px",
               color: "#1E1E1E",
             }}
