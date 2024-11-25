@@ -3,7 +3,6 @@ import React from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { StyledImage } from '../../Styles/styles'
 import fr39 from "../../Assets/Frame 39.png"
@@ -40,77 +39,100 @@ const Collection  = () =>{
         </Box>
       </Box>
       <Box
+  sx={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "stretch", // Ensures cards stretch equally
+    padding: "6px",
+    margin:"2.5rem",
+    marginTop:"16px"
+  }}
+>
+  {[frenchKissBag, KidsShoe, WomenC].map((imageSrc, index) => (
+    <Card
+      key={index}
+      sx={{
+        width: 450,
+        height: 400, 
+        borderRadius: "16px",
+        border: "1px solid #C1C1C1",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between", 
+        alignItems: "center",
+        paddingBottom: "16px",
+      }}
+    >
+      {/* Image Section */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: 258, // Fixed height for image area
+          width: "420px",
+          backgroundColor: "#F2F2F2",
+          borderRadius: "12px",
+          marginTop: "10px",
+        }}
+      >
+        <img
+          style={{
+            maxWidth: "100%",
+            maxHeight: "100%",
+            objectFit: "contain",
+            borderRadius: "12px",
+          }}
+          src={imageSrc}
+          alt={`Card ${index + 1}`}
+        />
+      </Box>
+
+      {/* Card Content */}
+      <CardContent
+        sx={{
+          width: "100%",
+          textAlign: "left",
+          marginLeft: "1.5rem",
+          flexGrow: 1, // Makes content take up available space
+        }}
+      >
+        <Typography gutterBottom variant="h5" component="div" sx={{fontFamily:"Poppins",fontWeight:"bold"}}>
+          {index === 0 ? "French Kiss Bag" : index === 1 ? "Burberry Shine" : "Alvero Gown"}
+        </Typography>
+        <Typography variant="body2" sx={{ color: "text.secondary",fontFamily:"Poppins" }}>
+          {index === 0 ? "ALDO" : index === 1 ? "FENDI" : "Divine"}
+        </Typography>
+      </CardContent>
+
+      {/* Card Actions */}
+      <CardActions
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px",
+          width: "100%",
+          padding: "0 16px",
         }}
       >
-        <Box>
-          <Card sx={{ width: 350 ,borderRadius:"16px",border:"1px solid #C1C1C1"}}>
-            <CardMedia
-              sx={{ height: 258,width:227 }}
-              image={frenchKissBag}
-              title="Bag"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                French Kiss Bag
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                ALDO
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">$500</Button>
-              <Button size="small" sx={{backgroundColor:"#FEA301",color:"white",alignItems:"center",textTransform: "none", }}>Add to cart</Button>
-            </CardActions>
-          </Card>
-        </Box>
-        <Box>
-        <Card sx={{ width: 350 ,borderRadius:"16px",border:"1px solid #C1C1C1"}}>
-            <CardMedia
-               sx={{ height: 213,width:213 }}
-              image={KidsShoe}
-              title="Bag"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Burberry Shine
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                FENDI
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">$150</Button>
-              <Button size="small" sx={{backgroundColor:"#FEA301",color:"white",alignItems:"center",textTransform: "none", }}>Add to cart</Button>
-            </CardActions>
-          </Card>
-        </Box>
-        <Box>
-        <Card sx={{ width: 350 ,borderRadius:"16px",border:"1px solid #C1C1C1"}}>
-            <CardMedia
-              sx={{ height: 202,width:161 }}
-              image={WomenC}
-              title="Bag"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Alvero Gown
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                Divine
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">$300</Button>
-              <Button size="small" sx={{backgroundColor:"#FEA301",color:"white",alignItems:"center",textTransform: "none", }}>Add to cart</Button>
-            </CardActions>
-          </Card>
-        </Box>
-      </Box>
+        <Button size="24px" sx={{ textTransform: "none",color:"black",fontWeight:"bold",fontFamily:"Poppins" }}>
+          ${index === 0 ? 500 : index === 1 ? 150 : 300}
+        </Button>
+        <Button
+          size="large"
+          sx={{
+            backgroundColor: "#FEA301",
+            color: "white",
+            textTransform: "none",
+            marginRight:"20px"
+          }}
+        >
+          Add to cart
+        </Button>
+      </CardActions>
+    </Card>
+  ))}
+</Box>
+
     </Box>
   );
 }
