@@ -64,7 +64,7 @@ const SubHome = () => {
           />
         </Box>
         <Box bgcolor={"#FEA301"} sx={{padding:"10px",borderRadius:"8px"}} mt={40} ml={-45}>
-          <Button sx={{width:"366px",height:"46px",fontSize:"14px",fontFamily:"Poppins",color:"black"}}>
+          <Button sx={{width:"366px",height:"46px",fontSize:"14px",fontWeight:"bold",fontFamily:"Poppins",color:"black",textTransform:"none"}}>
             Explore Now
           </Button>
         </Box>
