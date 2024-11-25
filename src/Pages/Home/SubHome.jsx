@@ -1,7 +1,9 @@
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Typography, Button } from '@mui/material';
 import React from 'react';
 import { colors } from '../../Constants/constant';
 import homePerPic from '../../Assets/Ellipse 3.png';
+import homePerPic2 from '../../Assets/Ellipse 5.png';
+import homePerPic3 from '../../Assets/Ellipse 4.png';
 
 const SubHome = () => {
   return (
@@ -27,7 +29,7 @@ const SubHome = () => {
         ml={-20}
       >
         {/* First Box */}
-        <Box mt={-50}>
+        <Box mt={-10}>
           <Typography
             sx={{
               fontFamily: "Alfa Slab One",
@@ -38,6 +40,16 @@ const SubHome = () => {
           >
             Gebeya
           </Typography>
+          <Avatar
+            alt="Home page Pic"
+            src={homePerPic2}
+            sx={{
+              marginLeft:"70px",
+              marginTop:"50px",
+              width: "260px",
+              height:"260px" ,
+            }}
+          />
         </Box>
 
         {/* Second Box */}
@@ -51,7 +63,11 @@ const SubHome = () => {
             }}
           />
         </Box>
-
+        <Box bgcolor={"#FEA301"} sx={{padding:"10px"}} mt={40} ml={-45}>
+          <Button sx={{width:"366px",height:"56px",fontSize:"14px",fontFamily:"Poppins",color:"black",borderRadius:"12px"}}>
+            Explore Now
+          </Button>
+        </Box>
         {/* Third Box */}
         <Box
           sx={{
@@ -60,7 +76,7 @@ const SubHome = () => {
             borderRadius: "10px",
             padding: "20px",
           }}
-          mt={-22}
+          mt={-2}
           ml={7}
         >
           <Typography
@@ -86,6 +102,14 @@ const SubHome = () => {
           >
             SHOP
           </Typography>
+          <Avatar
+            alt="Home page Pic"
+            src={homePerPic3}
+            sx={{
+              marginLeft:"50px",
+              width: "223px",
+              height:"223px" ,
+            }}/>
         </Box>
       </Box>
     </Box>
