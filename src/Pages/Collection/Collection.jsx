@@ -10,6 +10,11 @@ import fr38 from "../../Assets/Frame 38.png"
 import frenchKissBag from '../../Assets/kissBag.png'
 import KidsShoe from '../../Assets/KidsShoe.png'
 import WomenC from '../../Assets/WomenLibs.png'
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = () =>{
   return (
     <Box mt={6}>
@@ -61,9 +66,41 @@ const Collection  = () =>{
         justifyContent: "space-between", 
         alignItems: "center",
         paddingBottom: "16px",
+        position:"relative"
       }}
     >
-      {/* Image Section */}
+<Box
+    sx={{
+      position: "absolute",
+      top: 20,
+      left: 20, 
+      display: "flex",
+      gap: 37, 
+    }}
+  >
+    <Checkbox
+      sx={{
+        backgroundColor: "#FFFFFF",
+        borderRadius: "50%", // Optional: Makes the checkbox background circular
+      }}
+      {...label}
+      icon={<FavoriteBorder />}
+      checkedIcon={<Favorite />}
+    />
+    <Box
+      sx={{
+        backgroundColor: "#FFFFFF",
+        fontFamily:"Poppins",
+        borderRadius: "17px",
+        alignContent:"center",
+        width:"70px",
+        height: "40px",
+        textAlign:"center"
+      }}
+    > In Stock
+    </Box>
+  </Box>
+   {/* Image Section */}
       <Box
         sx={{
           display: "flex",
