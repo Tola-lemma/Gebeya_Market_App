@@ -13,10 +13,26 @@ import WomenC from '../../Assets/WomenLibs.png'
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-
+import col1 from '../../Assets/collection/images 1.png'
+import col2 from '../../Assets/collection/images 2.png'
+import col3 from '../../Assets/collection/3.png'
+import col4 from '../../Assets/collection/images 3.png'
+import col5 from '../../Assets/collection/download 1.png'
+import col6 from '../../Assets/collection/images 4.png'
+import CardRow from './CardRow';
+import col7 from '../../Assets/collection2/1.png'
+import col8 from '../../Assets/collection2/2.png'
+import col9 from '../../Assets/collection2/3.png'
+import col10 from '../../Assets/collection2/4.png'
+import col11 from '../../Assets/collection2/5.png'
+import col12 from '../../Assets/collection2/6.png'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = () =>{
   const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
+  const row1Images = [col1, col2, col3, col4, col5, col6];
+  const row2Images = [col7, col8, col9, col10, col11, col12]; 
+  const labels = ["Shoes", "Bags", "Jackets", "Lingerie", "Belts", "Street wears"];
+  const labels2 = ["Sunglasses", "Sun wear", "Hats", "Slippers", "Wigs", "Cosmetics"];
   return (
     <Box mt={6}>
       <Box
@@ -44,6 +60,7 @@ const Collection  = () =>{
           <StyledImage src={fr38} width={40} height={40} />
         </Box>
       </Box>
+      {/* cards */}
       <Box
         sx={{
           display: "flex",
@@ -264,7 +281,8 @@ const Collection  = () =>{
           </Card>
         ))}
       </Box>
-      <Box sx={{ display: "flex", gap:2,marginTop:"6rem" ,justifyContent:"space-evenly"}}>
+      {/* buttons  */}
+      <Box sx={{ display: "flex", gap:2,marginTop:"4rem" ,justifyContent:"space-evenly"}}>
       {buttons.map((btn, index) => (
         <Button
           key={index}
@@ -288,6 +306,9 @@ const Collection  = () =>{
         </Button>
       ))}
     </Box>
+    {/* optimized card row */}
+    <CardRow images={row1Images} labels={labels} marginT="3rem" />
+    <CardRow images={row2Images} labels={labels2} marginT="0.5rem"/>
     </Box>
   );
 }
