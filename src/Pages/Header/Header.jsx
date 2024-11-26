@@ -68,7 +68,13 @@ const HeaderPage = () => {
         }}
       >
         {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center",borderBottom: menuOpen ? "1px solid #E0E0E0" : "none", }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            borderBottom: menuOpen ? "1px solid #E0E0E0" : "none",
+          }}
+        >
           <IconButton
             onClick={toggleMenu}
             sx={{
@@ -101,7 +107,7 @@ const HeaderPage = () => {
         {/* Horizontal Navigation */}
         <Box
           sx={{
-            ml: 4,
+            // ml: 4,
             display: {
               xs: "none",
               // sm: menuOpen &&"flex",
@@ -126,7 +132,7 @@ const HeaderPage = () => {
                     page === "Home"
                       ? colors.background.black
                       : colors.background.black,
-                  mx: 2,
+                  mx: 1.5,
                 }}
               >
                 {page}
@@ -183,10 +189,10 @@ const HeaderPage = () => {
             border: "1px solid #C6C6C6",
             borderRadius: "50px",
             overflow: "hidden",
-            ml: { lg: 4 },
+            // ml: { lg: 2 },
           }}
         >
-          <Box sx={{ padding: "0 8px", color: "#1E1E1E" }}>
+          <Box sx={{ padding: "0 6px", color: "#1E1E1E" }}>
             <Search />
           </Box>
           <InputBase
@@ -203,8 +209,13 @@ const HeaderPage = () => {
             sx={{
               backgroundColor: colors.background.primary,
               color: "white",
-              width: "78px",
+              width: "65px",
               borderRadius: 0,
+              transition: "transform 0.2s ease-in-out",
+              "&:hover": {
+                backgroundColor: colors.background.primary,
+                transform: "scale(1.1)", 
+              },
             }}
           >
             <Search />
