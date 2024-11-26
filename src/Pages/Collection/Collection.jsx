@@ -47,7 +47,7 @@ const Collection  = () =>{
     ],
     [
       { title: "Handbag", brand: "Gucci", price: 800, imageSrc: col2 },
-      { title: "Sunglasses", brand: "Ray-Ban", price: 180, imageSrc: col8 },
+      { title: "Sun wear", brand: "Ray-Ban", price: 180, imageSrc: col8 },
       { title: "Belts", brand: "Prada", price: 500, imageSrc: col5 },
     ],
   ];
