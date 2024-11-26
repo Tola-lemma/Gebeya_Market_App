@@ -1,10 +1,9 @@
 import { Box, Rating, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { StyledImage } from '../../Styles/styles'
 import fr39 from "../../Assets/Frame 39.png"
 import fr38 from "../../Assets/Frame 38.png"
 import frenchKissBag from '../../Assets/kissBag.png'
@@ -27,6 +26,7 @@ import col10 from '../../Assets/collection2/4.png'
 import col11 from '../../Assets/collection2/5.png'
 import col12 from '../../Assets/collection2/6.png'
 import { DoubleArrow } from '@mui/icons-material';
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = () =>{
   const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
@@ -34,6 +34,40 @@ const Collection  = () =>{
   const row2Images = [col7, col8, col9, col10, col11, col12]; 
   const labels = ["Shoes", "Bags", "Jackets", "Lingerie", "Belts", "Street wears"];
   const labels2 = ["Sunglasses", "Sun wear", "Hats", "Slippers", "Wigs", "Cosmetics"];
+  const cardData = [
+    [
+      { title: "French Kiss Bag", brand: "ALDO", price: 500, imageSrc: frenchKissBag },
+      { title: "Burberry Shine", brand: "FENDI", price: 150, imageSrc: KidsShoe },
+      { title: "Alvero Gown", brand: "Divine", price: 300, imageSrc: WomenC },
+    ],
+    [
+      { title: "Sun Glasses", brand: "Rolex", price: 100, imageSrc: col7 },
+      { title: "Girls Shoes", brand: "Nike", price: 200, imageSrc: col1 },
+      { title: "Leather Jacket", brand: "Zara", price: 400, imageSrc: col3 },
+    ],
+    [
+      { title: "Handbag", brand: "Gucci", price: 800, imageSrc: col2 },
+      { title: "Sunglasses", brand: "Ray-Ban", price: 180, imageSrc: col8 },
+      { title: "Belts", brand: "Prada", price: 500, imageSrc: col5 },
+    ],
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeButton, setActiveButton] = useState("women"); // Set default active button
+  
+  // Handle button click
+  const handleButtonClick = (btn) => {
+    setActiveButton(btn);
+  };
+  // Handle arrow clicks
+  const handlePrevious = () => {
+    setCurrentSlide((prev) => (prev === 0 ? cardData.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev === cardData.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <Box mt={6}>
       <Box
@@ -57,8 +91,22 @@ const Collection  = () =>{
           justifyContent={"space-between"}
           sx={{ gap: 3 }}
         >
-          <StyledImage src={fr39} width={40} height={40} />
-          <StyledImage src={fr38} width={40} height={40} />
+            <Box
+          component="img"
+          src={fr39} 
+          width={40}
+          height={40}
+          onClick={handlePrevious}
+          sx={{ cursor: "pointer" }} 
+        />
+          <Box
+          component="img"
+          src={fr38} 
+          width={40}
+          height={40}
+          onClick={handleNext}
+          sx={{ cursor: "pointer" }} 
+        />
         </Box>
       </Box>
       {/* cards */}
@@ -72,7 +120,7 @@ const Collection  = () =>{
           marginTop: "16px",
         }}
       >
-        {[frenchKissBag, KidsShoe, WomenC].map((imageSrc, index) => (
+         {cardData[currentSlide].map((card, index) => (
           <Card
             key={index}
             sx={{
@@ -141,8 +189,8 @@ const Collection  = () =>{
                   objectFit: "contain",
                   borderRadius: "12px",
                 }}
-                src={imageSrc}
-                alt={`Card ${index + 1}`}
+                src={card.imageSrc}
+                alt={card.title}
               />
             </Box>
             <Box
@@ -238,17 +286,13 @@ const Collection  = () =>{
                 component="div"
                 sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
               >
-                {index === 0
-                  ? "French Kiss Bag"
-                  : index === 1
-                  ? "Burberry Shine"
-                  : "Alvero Gown"}
+                 {card.title}
               </Typography>
               <Typography
                 variant="body2"
                 sx={{ color: "text.secondary", fontFamily: "Poppins" }}
               >
-                {index === 0 ? "ALDO" : index === 1 ? "FENDI" : "Divine"}
+                  {card.brand}
               </Typography>
             </CardContent>
 
@@ -270,7 +314,7 @@ const Collection  = () =>{
                   fontFamily: "Poppins",
                 }}
               >
-                ${index === 0 ? 500 : index === 1 ? 150 : 300}
+                  ${card.price}
               </Button>
               <Button
                 size="large"
@@ -292,19 +336,22 @@ const Collection  = () =>{
       {buttons.map((btn, index) => (
         <Button
           key={index}
-          variant={btn === "women" ? "contained" : "outlined"}
+          variant={btn === activeButton ? "contained" : "outlined"}
+          onClick={() => handleButtonClick(btn)}
           sx={{
             borderRadius: "27px",
-            textTransform: "capitalize", // Keeps button text as-is (not uppercase)
+            textTransform: "capitalize", 
             padding: "8px 16px",
-            backgroundColor: btn === "women" ? "#FEA301" : "transparent",
-            color: btn === "women" ? "white" : "inherit",
-            border: btn === "women" ? "none" : "1px solid #C1C1C1",
-            width:"190px",
-            fontFamily:"Poppins",
-            fontSize:"24px",
+            backgroundColor: btn === activeButton ? "#FEA301" : "transparent",
+            color: btn === activeButton ? "white" : "inherit",
+            border: btn === activeButton ? "none" : "1px solid #C1C1C1",
+            width: "190px",
+            fontFamily: "Poppins",
+            fontSize: "24px",
             "&:hover": {
-              backgroundColor: btn === "women" ? "#e68a00" : "rgba(0,0,0,0.04)",
+              backgroundColor: btn === activeButton
+                ? "#e68a00"
+                : "rgba(0,0,0,0.04)",
             },
           }}
         >

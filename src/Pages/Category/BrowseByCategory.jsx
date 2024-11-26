@@ -1,44 +1,88 @@
-import React from 'react'
-import fr39 from "../../Assets/Frame 39.png"
-import fr38 from "../../Assets/Frame 38.png"
-import { Box, Card, CardContent, Typography } from '@mui/material'
-import { StyledImage } from '../../Styles/styles'
-import col1 from '../../Assets/category/images 5.png'
-import col2 from '../../Assets/category/images 6.png'
-import col3 from '../../Assets/category/images 7.png'
-import col4 from '../../Assets/category/images 8.png'
-const Category  = () =>{
-  const images = [col1, col2, col3, col4];
-  const labels = ["Casual Wear", "Vintage", "Beauty products", "Gym wears"];
-  const sublabels = ["Over 20 categories in stock", "Over 31 categories in stock", "Over 24 categories in stock", "Over 64 categories in stock"];
+import React, { useState } from 'react';
+import fr39 from "../../Assets/Frame 39.png";
+import fr38 from "../../Assets/Frame 38.png";
+import frenchKissBag from '../../Assets/kissBag.png'
+import KidsShoe from '../../Assets/KidsShoe.png'
+import { Box, Card, CardContent, Typography } from '@mui/material';
+import col1 from '../../Assets/category/images 5.png';
+import col2 from '../../Assets/category/images 6.png';
+import col3 from '../../Assets/category/images 7.png';
+import col4 from '../../Assets/category/images 8.png';
+
+const Category = () => {
+  // Categories data
+  const categoryData = [
+    [
+      { imageSrc: col1, label: "Casual Wear", subLabel: "Over 20 categories in stock" },
+      { imageSrc: col2, label: "Vintage", subLabel: "Over 31 categories in stock" },
+      { imageSrc: col3, label: "Beauty products", subLabel: "Over 24 categories in stock" },
+      { imageSrc: col4, label: "Gym wears", subLabel: "Over 64 categories in stock" },
+    ],
+    [
+      { imageSrc: col3, label: "Beauty products", subLabel: "Over 15 categories in stock" },
+      { imageSrc: KidsShoe, label: "Footwear", subLabel: "Over 50 categories in stock" },
+      { imageSrc: frenchKissBag, label: "Handbags", subLabel: "Over 32 categories in stock" },
+      { imageSrc: col2, label: "Winter Wear", subLabel: "Over 10 categories in stock" },
+    ],
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Handle arrow clicks
+  const handlePrevious = () => {
+    setCurrentSlide((prev) => (prev === 0 ? categoryData.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev === categoryData.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <Box mt={6}>
-    <Box
-    sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    }}
-  >
-    <Box ml={8}>
-      <Typography
-        color="initial"
-        sx={{ fontFamily: "Poppins", fontSize: "40px" }}
+      {/* Header and Controls */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        Browse by category
-      </Typography>
-    </Box>
-    <Box
-      mr={12}
-      display={"flex"}
-      justifyContent={"space-between"}
-      sx={{ gap: 3 }}
-    >
-      <StyledImage src={fr39} width={40} height={40} />
-      <StyledImage src={fr38} width={40} height={40} />
-    </Box>
-  </Box>
-  <Box
+        <Box ml={8}>
+          <Typography
+            color="initial"
+            sx={{ fontFamily: "Poppins", fontSize: "40px" }}
+          >
+            Browse by category
+          </Typography>
+        </Box>
+        <Box
+          mr={12}
+          display={"flex"}
+          justifyContent={"space-between"}
+          sx={{ gap: 3 }}
+        >
+          {/* Backward Arrow */}
+             <Box
+          component="img"
+          src={fr39} 
+          width={40}
+          height={40}
+          onClick={handlePrevious}
+          sx={{ cursor: "pointer" }}
+        />
+             <Box
+          component="img"
+          src={fr38} 
+          width={40}
+          height={40}
+          onClick={handleNext}
+          sx={{ cursor: "pointer" }} 
+        />
+        </Box>
+      </Box>
+
+      {/* Category Cards */}
+      <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -48,7 +92,7 @@ const Category  = () =>{
           marginTop: "1.2rem",
         }}
       >
-        {images.map((imageSrc, index) => (
+        {categoryData[currentSlide].map((category, index) => (
           <Card
             key={index}
             sx={{
@@ -83,8 +127,8 @@ const Category  = () =>{
                   objectFit: "contain",
                   borderRadius: "12px",
                 }}
-                src={imageSrc}
-                alt={`Card ${index + 1}`}
+                src={category.imageSrc}
+                alt={category.label}
               />
             </Box>
             {/* Card Content */}
@@ -104,20 +148,20 @@ const Category  = () =>{
                 component="div"
                 sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
               >
-                {labels[index]}
+                {category.label}
               </Typography>
               <Typography
                 variant="body2"
                 sx={{ color: "text.secondary", fontFamily: "Poppins" }}
               >
-               {sublabels[index]}
+                {category.subLabel}
               </Typography>
             </CardContent>
           </Card>
         ))}
       </Box>
-  </Box>
-  )
-}
+    </Box>
+  );
+};
 
-export default Category
+export default Category;
