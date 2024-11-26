@@ -115,8 +115,8 @@ const Collection  = () =>{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "stretch", // Ensures cards stretch equally
-          padding: "6px",
-          margin: "2.5rem",
+          padding: "2px",
+          // margin: "2.5rem",
           marginTop: "16px",
         }}
       >
@@ -124,7 +124,7 @@ const Collection  = () =>{
           <Card
             key={index}
             sx={{
-              width: 450,
+              width: 430,
               height: 450,
               borderRadius: "16px",
               border: "1px solid #C1C1C1",
@@ -142,7 +142,7 @@ const Collection  = () =>{
                 top: 20,
                 left: 20,
                 display: "flex",
-                gap: 37,
+                gap: 35,
               }}
             >
               <Checkbox
@@ -176,7 +176,7 @@ const Collection  = () =>{
                 justifyContent: "center",
                 alignItems: "center",
                 height: 258, // Fixed height for image area
-                width: "420px",
+                width: "410px",
                 backgroundColor: "#F2F2F2",
                 borderRadius: "12px",
                 marginTop: "10px",
@@ -199,7 +199,7 @@ const Collection  = () =>{
                 top: 270,
                 left: 20,
                 display: "flex",
-                gap: 30,
+                gap: 29,
               }}
             >
               <Box
