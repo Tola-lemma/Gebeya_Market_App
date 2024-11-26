@@ -26,6 +26,7 @@ import col9 from '../../Assets/collection2/3.png'
 import col10 from '../../Assets/collection2/4.png'
 import col11 from '../../Assets/collection2/5.png'
 import col12 from '../../Assets/collection2/6.png'
+import { DoubleArrow } from '@mui/icons-material';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = () =>{
   const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
@@ -157,13 +158,18 @@ const Collection  = () =>{
                 sx={{
                   backgroundColor: "#FFFFFF",
                   fontFamily: "Poppins",
-                  borderRadius: "20px",
+                  borderRadius: "18px",
                   alignContent: "center",
                   width: "70px",
                   height: "40px",
                   textAlign: "center",
                   border:"0.5px solid #C1C1C1",
-                  color:"#808080"
+                  color:"#808080",
+                  "&:hover": {
+                    color:"#882BEC",
+                    cursor:"pointer",
+                    border:"none"
+                  },
                 }}
               >
                 {index === 0 ? "women" : index === 1 ? "kids" : "women"}
@@ -309,6 +315,22 @@ const Collection  = () =>{
     {/* optimized card row */}
     <CardRow images={row1Images} labels={labels} marginT="3rem" />
     <CardRow images={row2Images} labels={labels2} marginT="0.5rem"/>
+    <Box sx={{display:"flex",justifyContent:"center"}} >
+      <Button 
+      sx={{
+        borderRadius: "15px",
+        textTransform: "capitalize",
+        padding: "8px 16px",
+        backgroundColor: "#882BEC",
+        color: "white",
+        width:"150px",
+        fontFamily:"Poppins",
+        fontSize:"16px",
+        "&:hover": {
+          backgroundColor:"#FEA301",
+        },
+      }} endIcon={<DoubleArrow/>} >See more</Button>
+    </Box>
     </Box>
   );
 }
