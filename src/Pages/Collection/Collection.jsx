@@ -16,6 +16,7 @@ import Favorite from '@mui/icons-material/Favorite';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = () =>{
+  const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
   return (
     <Box mt={6}>
       <Box
@@ -263,6 +264,30 @@ const Collection  = () =>{
           </Card>
         ))}
       </Box>
+      <Box sx={{ display: "flex", gap:2,marginTop:"6rem" ,justifyContent:"space-evenly"}}>
+      {buttons.map((btn, index) => (
+        <Button
+          key={index}
+          variant={btn === "women" ? "contained" : "outlined"}
+          sx={{
+            borderRadius: "27px",
+            textTransform: "capitalize", // Keeps button text as-is (not uppercase)
+            padding: "8px 16px",
+            backgroundColor: btn === "women" ? "#FEA301" : "transparent",
+            color: btn === "women" ? "white" : "inherit",
+            border: btn === "women" ? "none" : "1px solid #C1C1C1",
+            width:"190px",
+            fontFamily:"Poppins",
+            fontSize:"24px",
+            "&:hover": {
+              backgroundColor: btn === "women" ? "#e68a00" : "rgba(0,0,0,0.04)",
+            },
+          }}
+        >
+          {btn}
+        </Button>
+      ))}
+    </Box>
     </Box>
   );
 }
