@@ -96,7 +96,7 @@ const Category = () => {
           <Card
             key={index}
             sx={{
-              width: 320,
+              width: 300,
               height: 270,
               borderRadius: "16px",
               border: "1px solid #C1C1C1",
@@ -114,7 +114,7 @@ const Category = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 height: 190,
-                width: "290px",
+                width: "280px",
                 backgroundColor: "#F2F2F2",
                 borderRadius: "12px",
                 marginTop: "12px",

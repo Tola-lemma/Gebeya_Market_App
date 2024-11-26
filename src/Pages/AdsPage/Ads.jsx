@@ -20,7 +20,7 @@ const Ads  = () =>{
       }}
     >
       <StyledImage
-        width={1351}
+        width={1300}
         height={502}
         src={addsframe}
         sx={{

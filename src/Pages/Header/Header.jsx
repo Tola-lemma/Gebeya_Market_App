@@ -85,7 +85,7 @@ const HeaderPage = () => {
         <Box
           // sx={{ display: "flex", alignItems: "center", ml: "auto", mr: 4 }}
           sx={{
-            ml: { lg: 4 },
+            ml: { lg: 2 },
             display: { xs: "none", lg: "flex", xl: "flex" },
             flexDirection: { xs: "row", sm: "row" },
             alignItems: { lg: "center", sm: "flex-start", xs: "flex-start" },
@@ -94,9 +94,9 @@ const HeaderPage = () => {
         >
           <Person />
           <Typography ml={{ lg: 1 }} fontSize={{ lg: 16 }}>
-            Register/Sign In
+            Register/SignIn
           </Typography>
-          <KeyboardArrowDown sx={{ mr: { lg: 2 } }} />
+          <KeyboardArrowDown sx={{ mr: { lg: 1 } }} />
         </Box>
         {/* Horizontal Navigation */}
         <Box
