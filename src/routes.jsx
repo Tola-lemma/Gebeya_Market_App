@@ -4,6 +4,7 @@ import { CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { colors, NAME } from "./Constants/constant";
 import { ErrorProvider } from "./Components/ToastError/ErrorContext";
+const CheckOutPage = lazy(() =>import('./Pages/CartsPages/checkoutPage')) ;
 const CartDetails = lazy(()=>import('./Pages/CartsPages/CartDetailedPages'))
 const Home = lazy(()=>import('./Pages/MainHome/Home'))
 const containerStyle = {
@@ -70,12 +71,12 @@ const containerStyle = {
         element:<CartDetails/>
 
       },
-      // {
-      //   path:'/change_password/:token',
-      //   exact:true,
-      //   element:<ChangePassword/>
+      {
+        path:'/checkout',
+        exact:true,
+        element:<CheckOutPage/>
 
-      // },
+      },
     ];
     
     const AllRoute = ()=>{
@@ -85,6 +86,7 @@ const containerStyle = {
             <ErrorProvider>
             <Routes>
               <Route exact path="/" element={<Home />} />
+              <Route exact path="/checkout" element={<CheckOutPage/>} />
               <Route path="/cart/:cartId" element={<CartDetails />} />
             </Routes>
             </ErrorProvider>
