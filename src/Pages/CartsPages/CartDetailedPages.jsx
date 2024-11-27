@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
-import { NavigateNext, Remove,Add, ShoppingBag } from "@mui/icons-material";
+import { NavigateNext, Remove,Add, ShoppingBag, WhatsApp, Instagram, X } from "@mui/icons-material";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -173,15 +173,13 @@ const CartDetails = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#F2F2F2",
                     borderRadius: "18px",
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "flex-start", // Align to the start
-                    alignItems: "center", // Ensure vertical centering
-                    gap: "8px", // Space between images
+                    gap: "15px", // Space between images
                     padding: "8px",
                     color: "#808080",
+                    marginLeft:"-95px",
                     "&:hover": {
                       color: "#882BEC",
                       cursor: "pointer",
@@ -196,6 +194,7 @@ const CartDetails = () => {
                       height: "64px",
                       objectFit: "cover",
                       borderRadius: "8px",
+                      backgroundColor: "#F2F2F2",
                     }}
                   />
                   <img
@@ -206,6 +205,7 @@ const CartDetails = () => {
                       height: "64px",
                       objectFit: "cover",
                       borderRadius: "8px",
+                      backgroundColor: "#F2F2F2",
                     }}
                   />
                   <img
@@ -216,6 +216,7 @@ const CartDetails = () => {
                       height: "64px",
                       objectFit: "cover",
                       borderRadius: "8px",
+                      backgroundColor: "#F2F2F2",
                     }}
                   />
                   <img
@@ -226,6 +227,7 @@ const CartDetails = () => {
                       height: "64px",
                       objectFit: "cover",
                       borderRadius: "8px",
+                      backgroundColor: "#F2F2F2",
                     }}
                   />
                 </Box>
@@ -245,9 +247,12 @@ const CartDetails = () => {
                 >
                   <Typography
                     variant="body2"
-                    sx={{ color: "text.secondary", fontFamily: "Poppins" }}
+                    sx={{ color: "text.secondary", fontFamily: "Poppins"}}
                   >
                     Share this product
+                  </Typography>
+                  <Typography >
+                  <WhatsApp/> <Instagram/> <X/>
                   </Typography>
                 </CardContent>
               </Card>
@@ -594,6 +599,7 @@ const CartDetails = () => {
                  Buy Now
                 </Button>
               </Box>
+              <p style={{textAlign:"center",color:"#006200",fontSize:18,fontFamily:"Poppins"}}>Pickup & Pay on collection available</p>
             </Box>
           </Box>
           <Box sx={{ backgroundColor: "#fff" }}>2</Box>
