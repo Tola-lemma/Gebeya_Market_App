@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "./CartContext";
-import { Box, Typography, Button, styled, Card, CardContent, Rating } from "@mui/material";
+import { Box, Typography, Button, styled, Card, CardContent, Rating, Divider, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import HeaderPage from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Link from "@mui/material/Link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
-import { NavigateNext, Remove,Add, ShoppingBag, WhatsApp, Instagram, X } from "@mui/icons-material";
+import { NavigateNext, Remove,Add, ShoppingBag, WhatsApp, Instagram, X, LocalShipping, EventRepeat } from "@mui/icons-material";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -16,14 +16,16 @@ const CartDetails = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
-  const [quantity, setQuantity] = useState(1); // Initial quantity value
+  const [quantity, setQuantity] = useState(1); 
+  const [location, setLocation] = useState('');
+  const [sublocation, setSublocation] = useState('');
   const totalPrice = item?.price * quantity;
   const discountedPrice = totalPrice * 0.5;
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   const CenteredBox = styled(Box)({
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center", 
     alignItems: "center",
     height: "70vh",
     textAlign: "center",
@@ -83,10 +85,18 @@ const CartDetails = () => {
       {item?.title}
     </Typography>,
   ];
+
+  const handleLChange = (event) => {
+    setLocation(event.target.value);
+  };
+  const handleSChange = (event) => {
+      setSublocation(event.target.value);
+  };
+
   return (
     <>
       <HeaderPage />
-      <Box sx={{ backgroundColor: "#E8E8E8" }} mb={6}>
+      <Box sx={{ backgroundColor: "#E8E8E8" }} mb={6} p={6}>
         <Box>
           <Stack spacing={2}>
             <Breadcrumbs
@@ -144,7 +154,7 @@ const CartDetails = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  boxShadow:"none",
+                  boxShadow: "none",
                   alignItems: "center",
                   marginBottom: "14px",
                 }}
@@ -181,7 +191,7 @@ const CartDetails = () => {
                     gap: "15px", // Space between images
                     padding: "8px",
                     color: "#808080",
-                    marginLeft:"-95px",
+                    marginLeft: "-95px",
                     "&:hover": {
                       color: "#882BEC",
                       cursor: "pointer",
@@ -249,12 +259,12 @@ const CartDetails = () => {
                 >
                   <Typography
                     variant="body2"
-                    sx={{ color: "text.secondary", fontFamily: "Poppins"}}
+                    sx={{ color: "text.secondary", fontFamily: "Poppins" }}
                   >
                     Share this product
                   </Typography>
-                  <Typography >
-                  <WhatsApp/> <Instagram/> <X/>
+                  <Typography>
+                    <WhatsApp /> <Instagram /> <X />
                   </Typography>
                 </CardContent>
               </Card>
@@ -283,7 +293,7 @@ const CartDetails = () => {
                     fontSize: 36,
                   }}
                 >
-                 {item?.title}
+                  {item?.title}
                 </Typography>
 
                 <Checkbox
@@ -311,8 +321,7 @@ const CartDetails = () => {
                     marginRight: "8px",
                   }}
                 >
-                 {/* ${item?.price} */}
-                 ${discountedPrice.toFixed(2)}
+                  {/* ${item?.price} */}${discountedPrice.toFixed(2)}
                 </span>
                 <span
                   style={{
@@ -572,40 +581,149 @@ const CartDetails = () => {
                   style={{
                     borderRadius: "8px",
                     width: "150px",
-                    height:"50px",
-                    border:"1px solid black",
+                    height: "50px",
+                    border: "1px solid black",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     padding: "0 14px",
                     marginLeft: "8px", // Optional: Adds space between the text and the button
                   }}
-                  startIcon={<ShoppingBag/>}
+                  startIcon={<ShoppingBag />}
                 >
-                 Add to cart
+                  Add to cart
                 </Button>
                 <Button
                   style={{
                     borderRadius: "8px",
                     width: "130px",
                     display: "flex",
-                    height:"50px",
-                    backgroundColor:"#FEA301",
-                    textTransform:"none",
-                    color:"white",
+                    height: "50px",
+                    backgroundColor: "#FEA301",
+                    textTransform: "none",
+                    color: "white",
                     alignItems: "center",
                     justifyContent: "center",
                     padding: "0 14px",
                     marginLeft: "8px", // Optional: Adds space between the text and the button
                   }}
                 >
-                 Buy Now
+                  Buy Now
                 </Button>
               </Box>
-              <p style={{textAlign:"center",color:"#006200",fontSize:18,fontFamily:"Poppins"}}>Pickup & Pay on collection available</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "#006200",
+                  fontSize: 18,
+                  fontFamily: "Poppins",
+                }}
+              >
+                Pickup & Pay on collection available
+              </p>
             </Box>
           </Box>
-          <Box sx={{ backgroundColor: "#fff" }}>2</Box>
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              border: "1px solid #C1C1C1",
+              borderRadius: "12px",
+            }}
+          >
+            <Card variant="outlined" sx={{ width: 400, borderRadius: "12px" }}>
+              <Box sx={{ p: 2 }}>
+                <Stack
+                  direction="row"
+                  sx={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <Typography gutterBottom variant="h4" component="div" ml={6}>
+                    Delivery & Returns
+                  </Typography>
+                </Stack>
+              </Box>
+              <Divider />
+              <Box p={5}>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  style={{ fontFamily: "Poppins" }}
+                >
+                  location
+                </Typography>
+                <p></p>
+                <FormControl fullWidth>
+                  <InputLabel id="location-label">Location</InputLabel>
+                  <Select
+                    labelId="location-label"
+                    id="locat"
+                    value={location}
+                    label="Location"
+                    onChange={handleLChange}
+                  >
+                    <MenuItem value="Addis Ababa">Addis Ababa</MenuItem>
+                    <MenuItem value="Bishoftu">Bishoftu</MenuItem>
+                    <MenuItem value="Adama">Adama</MenuItem>
+                    <MenuItem value="Gonder">Gonder</MenuItem>
+                    <MenuItem value="Hawasa">Hawasa</MenuItem>
+                  </Select>
+                </FormControl>
+                <p></p>
+                <FormControl fullWidth>
+                  <InputLabel id="sublocation">Sub-Location</InputLabel>
+                  <Select
+                    labelId="sublocation"
+                    id="sublocat"
+                    value={sublocation}
+                    label="Sub-Location"
+                    onChange={handleSChange}
+                  >
+                    <MenuItem value={"Lideta"}>Lideta</MenuItem>
+                    <MenuItem value={"Kurkura"}>Kurkura</MenuItem>
+                    <MenuItem value={"Bole"}>Bole</MenuItem>
+                    <MenuItem value={"Lasta"}>Lasta</MenuItem>
+                    <MenuItem value={"Kirkos"}>Kirkos</MenuItem>
+                    <MenuItem value={"4 kilo"}>4 kilo</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
+                p={1}
+              >
+                <LocalShipping /> <span>Delivery</span>
+              </Typography>
+              <Typography variant="body2" sx={{ fontFamily: "Poppins" }} p={2}>
+                <strong>Estimated delivery time:</strong> 1-12 business days{" "}
+                <br />
+                <strong>For Same-Day-Delivery:</strong> Please place your order
+                before 12pm <br />
+                <strong>Next-Day-Delivery:</strong> Orders placed after 12pm
+                will be delivered the next day. <br />
+                <strong>Note:</strong> Availability may vary by location
+              </Typography>
+
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
+                p={1}
+              >
+                <EventRepeat /> <span>Return Policy</span>
+              </Typography>
+              <Typography variant="body2" sx={{ fontFamily: "Poppins" }} p={2}>
+                <strong>Guaranteed 7-day return policy:</strong> <br />
+                For details about return shipping options, please visit our
+                Contact page
+              </Typography>
+            </Card>
+          </Box>
         </Box>
       </Box>
       <Footer />
