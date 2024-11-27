@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "./CartContext";
-import { Box, Typography, Button, styled, Card, CardContent, CardActions, Rating } from "@mui/material";
+import { Box, Typography, Button, styled, Card, CardContent, Rating } from "@mui/material";
 import HeaderPage from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Link from "@mui/material/Link";
@@ -86,7 +86,7 @@ const CartDetails = () => {
   return (
     <>
       <HeaderPage />
-      <Box sx={{ backgroundColor: "#E8E8E8" }}>
+      <Box sx={{ backgroundColor: "#E8E8E8" }} mb={6}>
         <Box>
           <Stack spacing={2}>
             <Breadcrumbs
@@ -144,8 +144,9 @@ const CartDetails = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
+                  boxShadow:"none",
                   alignItems: "center",
-                  paddingBottom: "16px",
+                  marginBottom: "14px",
                 }}
               >
                 {/* Image Section */}
