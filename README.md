@@ -39,6 +39,12 @@ This project demonstrates a dynamic pricing calculation for an e-commerce checko
 - **Tax Calculation:** Applies a 5% tax on the subtotal + shipping.
 - **Total Calculation:** Automatically updates based on price, shipping, and tax.
 
+## Prerequisites
+
+- React
+- Material-UI (MUI)
+# Project Structure
+```
 root/
 ├── frontend/
 │   ├── src/
@@ -52,9 +58,3 @@ root/
 │   │   ├── Styles/
 │   │   ├── pages/
 │   └── public/
-
-
-## Prerequisites
-
-- React
-- Material-UI (MUI)
