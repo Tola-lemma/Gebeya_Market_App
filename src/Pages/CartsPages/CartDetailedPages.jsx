@@ -11,11 +11,14 @@ import { NavigateNext, Remove,Add, ShoppingBag, WhatsApp, Instagram, X, LocalShi
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import { ErrorContext } from "../../Components/ToastError/ErrorContext";
+import { ErrorMessage } from "../../Components/ToastError/ErrorMessage";
 const CartDetails = () => {
   const { cartId } = useParams();
   const { cartItems, removeFromCart } = useContext(CartContext);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
+  const {showSuccess,showWarning} = useContext(ErrorContext)
   const [quantity, setQuantity] = useState(1); 
   const [location, setLocation] = useState('');
   const [sublocation, setSublocation] = useState('');
@@ -590,6 +593,7 @@ const CartDetails = () => {
                     marginLeft: "8px", // Optional: Adds space between the text and the button
                   }}
                   startIcon={<ShoppingBag />}
+                  onClick={()=>showWarning(`${item?.title} is already in cart`)}
                 >
                   Add to cart
                 </Button>
@@ -726,6 +730,7 @@ const CartDetails = () => {
           </Box>
         </Box>
       </Box>
+      <ErrorMessage/>
       <Footer />
     </>
   );
