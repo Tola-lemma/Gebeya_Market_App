@@ -11,7 +11,8 @@ import { NavigateNext } from "@mui/icons-material";
 const CartDetails = () => {
   const { cartId } = useParams();
   const { cartItems, removeFromCart } = useContext(CartContext);
-
+// console.log("id",cartId);
+// console.log("item",cartItems.cartId);
   const item = cartItems.find((item) => item.cartId === cartId);
   const CenteredBox = styled(Box)({
       display: "flex",
