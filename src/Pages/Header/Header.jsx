@@ -176,7 +176,7 @@ const HeaderPage = () => {
             {moreMenuItems.map((item, index) => (
               <MenuItem key={index} onClick={handleCloseMoreMenu}>
                 <List sx={style}>
-                  <ListItem>
+                  <ListItem onClick={() => (window.location.href = "/")}>
                     <ListItemText primary={item} />
                   </ListItem>
                   <Divider component="li" />
