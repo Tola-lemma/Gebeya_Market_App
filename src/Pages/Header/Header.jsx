@@ -12,7 +12,7 @@ import {
   ListItemText,
   List,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyledImage, StyledToolbar } from "../../Styles/styles";
 import logoImg from "../../Assets/image-removebg-preview.png";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,6 +20,8 @@ import { colors } from "../../Constants/constant";
 import shopingIcon from "../../Assets/Frame 24.png";
 import { KeyboardArrowDown, Person, Search, Close } from "@mui/icons-material";
 import UnitedKingdom from "../../Assets/united kingdom.png";
+import { CartContext } from "../CartsPages/CartContext";
+import { useNavigate } from "react-router-dom";
 const style = {
   p: 0,
   width: "100%",
@@ -28,7 +30,8 @@ const style = {
 const HeaderPage = () => {
   const [moreAnchorEl, setMoreAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { cartItems } = useContext(CartContext);
+  console.log("cart item",cartItems);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -40,7 +43,8 @@ const HeaderPage = () => {
   const handleCloseMoreMenu = () => {
     setMoreAnchorEl(null);
   };
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
   const moreMenuItems = [
     "Perfumes",
     "Jewelries",
@@ -134,6 +138,7 @@ const HeaderPage = () => {
                       : colors.background.black,
                   mx: 1.5,
                 }}
+                onClick={() => (window.location.href = "/")}
               >
                 {page}
               </Typography>
@@ -239,8 +244,9 @@ const HeaderPage = () => {
             </Typography>
             <KeyboardArrowDown sx={{ mr: 2 }} />
           </Box>
+          <IconButton onClick={() => setShowDropdown(!showDropdown)}>
           <Badge
-            badgeContent={2}
+            badgeContent={cartItems.length}
             sx={{
               "& .MuiBadge-badge": {
                 color: colors.background.white,
@@ -252,6 +258,42 @@ const HeaderPage = () => {
           >
             <StyledImage src={shopingIcon} height={44} width={44} />
           </Badge>
+          </IconButton>
+          {showDropdown && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '60px',
+            right: '0',
+            width: '300px',
+            backgroundColor: 'white',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            zIndex: 10,
+          }}
+        >
+          {cartItems.length === 0 ? (
+            <Typography sx={{ padding: '16px' }}>Your cart is empty</Typography>
+          ) : (
+            cartItems.map((item) => (
+              <Box
+                key={item.cartId}
+                sx={{
+                  padding: '16px',
+                  borderBottom: '1px solid #ccc',
+                  cursor: 'pointer',
+                  '&:hover': { backgroundColor: '#f4f4f4' },
+                }}
+                onClick={() => {
+                  setShowDropdown(false);
+                  navigate(`/cart/${item.cartId}`);
+                }}
+              >
+                <Typography>{item.title}</Typography>
+              </Box>
+            ))
+          )}
+        </Box>
+      )}
         </Box>
       </StyledToolbar>
       {/* Mobile Menu Section: Expands Only When Toggled */}

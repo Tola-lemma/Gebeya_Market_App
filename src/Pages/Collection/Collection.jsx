@@ -1,5 +1,5 @@
 import { Box, Rating, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -26,9 +26,11 @@ import col10 from '../../Assets/collection2/4.png'
 import col11 from '../../Assets/collection2/5.png'
 import col12 from '../../Assets/collection2/6.png'
 import { DoubleArrow } from '@mui/icons-material';
+import { CartContext } from '../CartsPages/CartContext';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-const Collection  = () =>{
+const Collection  = ({card}) =>{
+  const { addToCart } = useContext(CartContext);
   const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
   const row1Images = [col1, col2, col3, col4, col5, col6];
   const row2Images = [col7, col8, col9, col10, col11, col12]; 
@@ -324,6 +326,7 @@ const Collection  = () =>{
                   textTransform: "none",
                   marginRight: "20px",
                 }}
+                onClick={() => addToCart(card)}
               >
                 Add to cart
               </Button>
