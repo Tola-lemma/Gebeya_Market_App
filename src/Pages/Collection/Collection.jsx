@@ -27,10 +27,11 @@ import col11 from '../../Assets/collection2/5.png'
 import col12 from '../../Assets/collection2/6.png'
 import { DoubleArrow } from '@mui/icons-material';
 import { CartContext } from '../CartsPages/CartContext';
-
+import { useNavigate } from 'react-router-dom';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Collection  = ({card}) =>{
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
   const buttons = ["men", "women", "kids", "perfumes", "sports", "jewelry"];
   const row1Images = [col1, col2, col3, col4, col5, col6];
   const row2Images = [col7, col8, col9, col10, col11, col12]; 
@@ -69,7 +70,11 @@ const Collection  = ({card}) =>{
   const handleNext = () => {
     setCurrentSlide((prev) => (prev === cardData.length - 1 ? 0 : prev + 1));
   };
-
+  const handleAddToCartAndNavigate = (card) => {
+    const item = addToCart(card); 
+    navigate(`/cart/${item.cartId}`);
+  };
+  
   return (
     <Box mt={6}>
       <Box
@@ -183,6 +188,7 @@ const Collection  = ({card}) =>{
                 borderRadius: "12px",
                 marginTop: "10px",
               }}
+              onClick={()=>handleAddToCartAndNavigate(card)}
             >
               <img
                 style={{
