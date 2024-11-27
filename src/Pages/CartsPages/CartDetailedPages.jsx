@@ -17,7 +17,8 @@ const CartDetails = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
   const [quantity, setQuantity] = useState(1); // Initial quantity value
-
+  const totalPrice = item?.price * quantity;
+  const discountedPrice = totalPrice * 0.5;
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   const CenteredBox = styled(Box)({
@@ -309,7 +310,8 @@ const CartDetails = () => {
                     marginRight: "8px",
                   }}
                 >
-                 ${item?.price}
+                 {/* ${item?.price} */}
+                 ${discountedPrice.toFixed(2)}
                 </span>
                 <span
                   style={{
@@ -319,7 +321,7 @@ const CartDetails = () => {
                     marginRight: "8px",
                   }}
                 >
-                  $300
+                  ${totalPrice.toFixed(2)}
                 </span>
 
                 {/* Discount */}
