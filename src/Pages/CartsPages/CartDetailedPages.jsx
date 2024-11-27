@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import { Box, Typography, Button, styled, Card, CardContent, Rating, Divider, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
@@ -15,7 +16,7 @@ import { ErrorContext } from "../../Components/ToastError/ErrorContext";
 import { ErrorMessage } from "../../Components/ToastError/ErrorMessage";
 const CartDetails = () => {
   const { cartId } = useParams();
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
   const {showSuccess,showWarning} = useContext(ErrorContext)
@@ -26,6 +27,18 @@ const CartDetails = () => {
   const discountedPrice = totalPrice * 0.5;
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  const navigate = useNavigate()
+  const handleBuyNow = () => {
+      const { title, brand, imageSrc } = item;
+      navigate("/checkout", {
+        state: {
+          title,
+          brand,
+          price: discountedPrice.toFixed(2),
+          imageSrc,
+        },
+      });
+    };
   const CenteredBox = styled(Box)({
     display: "flex",
     justifyContent: "center", 
@@ -598,6 +611,7 @@ const CartDetails = () => {
                   Add to cart
                 </Button>
                 <Button
+                  onClick={handleBuyNow}
                   style={{
                     borderRadius: "8px",
                     width: "130px",
