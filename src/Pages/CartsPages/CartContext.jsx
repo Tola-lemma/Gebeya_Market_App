@@ -7,27 +7,26 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
-    const existingItem = cartItems.find(
-      (cartItem) =>
-        cartItem.title === item.title &&
-        cartItem.brand === item.brand &&
-        cartItem.price === item.price
-    );
-
-    if (existingItem) {
-      alert(`${item.title} is already in the cart.`);
-      return;
-    }
-
-    const newItem = { ...item, cartId: uuidv4() };
-    setCartItems((prevItems) => [...prevItems, newItem]);
-  };
-
+      const existingItem = cartItems.find(
+        (cartItem) =>
+          cartItem.title === item.title &&
+          cartItem.brand === item.brand &&
+          cartItem.price === item.price
+      );
+    
+      if (existingItem) {
+        alert(`${item.title} is already in the cart.`);
+        return existingItem; // Return existing item if found
+      }
+    
+      const newItem = { ...item, cartId: uuidv4() };
+      setCartItems((prevItems) => [...prevItems, newItem]);
+      return newItem; // Return newly created item
+    };
+    
   const removeFromCart = (cartId) => {
-    console.log("Removing item with cartId:", cartId); // Debugging log
     setCartItems((prevItems) => {
       const filteredItems = prevItems.filter((item) => item.cartId !== cartId);
-      console.log("Updated cart items:", filteredItems); // Debugging log
       return filteredItems;
     });
   };
