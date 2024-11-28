@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Button,Card,  Divider, FormControl,  TextField } from "@mui/material";
+import { Box, Typography, Button,Card,  Divider, FormControl,  TextField, Alert, Modal } from "@mui/material";
 import HeaderPage from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Stack from "@mui/material/Stack";
 import {  Grid } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 const CheckOutPage = ()=>{
    
         const [formData, setFormData] = useState({
@@ -29,10 +29,47 @@ const CheckOutPage = ()=>{
     setShipping(randomShipping);
     setTotal(computedTotal);
   }, [price]);
-        const handleChange = (e) => {
-            const { name, value } = e.target;
-            setFormData((prev) => ({ ...prev, [name]: value }));
+          const [paymentMethod, setPaymentMethod] = useState('');
+          const [modalOpen, setModalOpen] = useState(false);
+          const [alertOpen, setAlertOpen] = useState(false);
+          const [error, setError] = useState(false);
+          const navigate = useNavigate();
+        
+          const handleChange = (e) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
           };
+        
+          const handlePaymentMethod = (method) => setPaymentMethod(method);
+        
+          const validateForm = () => {
+            return (
+              formData.name &&
+              formData.address1 &&
+              formData.city &&
+              formData.state &&
+              formData.zip &&
+              paymentMethod
+            );
+          };
+        
+          const handlePlaceOrder = () => {
+            if (validateForm()) {
+              setModalOpen(true);
+              setError(false);
+            } else {
+              setError(true);
+            }
+          };
+        
+          const handleSubmitOrder = () => {
+            setModalOpen(false);
+            setAlertOpen(true);
+            setTimeout(() => {
+              setAlertOpen(false);
+              navigate('/');
+            }, 2000);
+          };
+        
       return (
         <>
           <HeaderPage />
@@ -51,6 +88,7 @@ const CheckOutPage = ()=>{
               }}
               ml={6}
             >
+               
               <Box
                 sx={{
                   display: "flex",
@@ -74,6 +112,7 @@ const CheckOutPage = ()=>{
                     marginBottom: "14px",
                   }}
                 >
+                  { <Alert severity="success">Order placed successfully!</Alert>}
                   <Typography
                     variant="h6"
                     sx={{ marginBottom: "16px", fontFamily: "Poppins" }}
@@ -191,15 +230,16 @@ const CheckOutPage = ()=>{
                       Order Summary
                     </Typography>
                   </Stack>
+                  {error && <Alert severity="error">Please fill in all required fields!</Alert>}
                 </Box>
                 <Divider />
                 <Box p={2} display={"flex"} justifyContent={"space-evenly"}>
                   <img
-                    src={imageSrc&&imageSrc}
+                    src={imageSrc && imageSrc}
                     alt="images source"
                     width={60}
                     height={60}
-                    style={{marginRight:"20px",backgroundColor: "#F2F2F2",}}
+                    style={{ marginRight: "20px", backgroundColor: "#F2F2F2" }}
                   />
                   <Box
                     display="flex"
@@ -268,7 +308,12 @@ const CheckOutPage = ()=>{
                     >
                       Tax (5%)
                     </Typography>
-                    <Typography>${price?((Number(price) + shipping) * 0.05).toFixed(2):5}</Typography>
+                    <Typography>
+                      $
+                      {price
+                        ? ((Number(price) + shipping) * 0.05).toFixed(2)
+                        : 5}
+                    </Typography>
                   </Box>
 
                   {/* Divider */}
@@ -292,12 +337,13 @@ const CheckOutPage = ()=>{
                       Total
                     </Typography>
                     <Typography sx={{ fontWeight: "bold", fontSize: "18px" }}>
-                    ${total}
+                      ${total}
                     </Typography>
                   </Box>
 
                   {/* Order Button */}
                   <Button
+                   onClick={handlePlaceOrder}
                     fullWidth
                     variant="contained"
                     color="primary"
@@ -320,7 +366,39 @@ const CheckOutPage = ()=>{
               </Card>
             </Box>
           </Box>
+     {/* Modal for Order Summary */}
+     <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: '10px',
+          }}
+        >
+          <Typography variant="h6" mb={2}>
+            Order Summary
+          </Typography>
+          <Typography>Name: {formData.name}</Typography>
+          <Typography>Address: {formData.address1}, {formData.city}</Typography>
+          <Typography>Total Fee: ${total}</Typography>
+          <Typography>Payment Method: {paymentMethod}</Typography>
+          <Button
+            onClick={handleSubmitOrder}
+            variant="contained"
+            sx={{ mt: 3, backgroundColor: '#FEA301', '&:hover': { backgroundColor: '#E89001' } }}
+          >
+            Submit Order
+          </Button>
+        </Box>
+      </Modal>
 
+     
           <Box
             sx={{
               display: "flex",
@@ -352,67 +430,25 @@ const CheckOutPage = ()=>{
                 Payment Method
               </Typography>
               <Box display={"flex"} justifyContent={"space-between"} gap={3}>
-                <Button
-                  sx={{
-                    backgroundColor: "#FEA301",
-                    color: "white",
-                    width: "160px",
-                    height: "104px",
-                    fontFamily: "Poppins",
-                    fontWeight: "bold",
-                    border: "1px solid #C1C1C1",
-                    padding: "12px",
-                    fontSize: "16px",
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#E89001",
-                    },
-                  }}
-                >
-                  Card
-                </Button>
-                <Button
-                  sx={{
-                    // backgroundColor: "#FEA301",
-                    color: "black",
-                    fontFamily: "Poppins",
-                    fontWeight: "bold",
-                    width: "160px",
-                    height: "104px",
-                    border: "1px solid #C1C1C1",
-                    padding: "12px",
-                    fontSize: "16px",
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#E89001",
-                    },
-                  }}
-                >
-                  Wallet
-                </Button>
-                <Button
-                  sx={{
-                    // backgroundColor: "#FEA301",
-                    color: "black",
-                    fontFamily: "Poppins",
-                    fontWeight: "bold",
-                    border: "1px solid #C1C1C1",
-                    width: "160px",
-                    height: "104px",
-                    padding: "12px",
-                    fontSize: "16px",
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#E89001",
-                    },
-                  }}
-                >
-                  Bank Tansfer
-                </Button>
+                {["Card", "Wallet", "Bank Transfer"].map((method) => (
+                  <Button
+                    key={method}
+                    onClick={() => handlePaymentMethod(method)}
+                    sx={{
+                      width: "160px",
+                      height: "104px",
+                      backgroundColor:
+                        paymentMethod === method ? "#FEA301" : "white",
+                      color: paymentMethod === method ? "white" : "black",
+                      fontWeight: "bold",
+                      "&:hover": { backgroundColor: "#E89001" },
+                    }}
+                  >
+                    {method}
+                  </Button>
+                ))}
               </Box>
+
               <Box
                 sx={{
                   display: "flex",
