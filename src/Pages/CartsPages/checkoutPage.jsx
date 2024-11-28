@@ -438,6 +438,7 @@ const CheckOutPage = ()=>{
                     sx={{
                       width: "160px",
                       height: "104px",
+                      textTransform:"none",
                       backgroundColor:
                         paymentMethod === method ? "#FEA301" : "white",
                       color: paymentMethod === method ? "white" : "black",
