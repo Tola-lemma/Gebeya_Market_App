@@ -112,7 +112,7 @@ const CheckOutPage = ()=>{
                     marginBottom: "14px",
                   }}
                 >
-                  { <Alert severity="success">Order placed successfully!</Alert>}
+                  {alertOpen && <Alert severity="success">Order placed successfully!</Alert>}
                   <Typography
                     variant="h6"
                     sx={{ marginBottom: "16px", fontFamily: "Poppins" }}
