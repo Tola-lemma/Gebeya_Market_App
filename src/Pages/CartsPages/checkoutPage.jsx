@@ -77,6 +77,7 @@ const CheckOutPage = ()=>{
             sx={{ display: "flex", justifyContent: "space-between" }}
             mt={3}
             mb={2}
+            p={6}
           >
             <Box
               sx={{
@@ -403,13 +404,13 @@ const CheckOutPage = ()=>{
             sx={{
               display: "flex",
               backgroundColor: "#fff",
-              marginLeft: "6px",
               border: "1px solid #C1C1C1",
               borderRadius: "12px",
               width: "600px",
             }}
             ml={6}
             mb={3}
+            p={6}
           >
             <Card
               // key={index}
