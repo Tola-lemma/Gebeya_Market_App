@@ -16,7 +16,7 @@ import { ErrorContext } from "../../Components/ToastError/ErrorContext";
 import { ErrorMessage } from "../../Components/ToastError/ErrorMessage";
 const CartDetails = () => {
   const { cartId } = useParams();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);  //removeFromCart   is handle deleting items from cart whenever needed
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
   // const item= true  //for testing other UI when there is items in carts
@@ -162,14 +162,6 @@ const content = {
             alt={item?.title}
             style={{ width: "100%", maxHeight: "300px" }}
           /> */}
-          {/* <Button
-            onClick={() => {
-              removeFromCart(item?.cartId);
-            }}
-            sx={{ marginTop: "16px", backgroundColor: "red", color: "white" }}
-          >
-            Remove from Cart
-          </Button> */}
         </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box
@@ -670,6 +662,23 @@ const content = {
               >
                 Pickup & Pay on collection available
               </p>
+              {/* <p></p>
+              <Button
+                onClick={() => {
+                  removeFromCart(item?.cartId);
+                }}
+                sx={{
+                  marginTop: "16px",
+                  backgroundColor: "red",
+                  borderRadius:"12px",
+                  color: "white",
+                   textTransform:"none"
+                }}
+                startIcon={<Delete/>}
+                ml={8}
+              >
+                Remove Items from Cart ?
+              </Button> */}
             </Box>
           </Box>
           <Box
