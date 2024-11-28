@@ -19,6 +19,7 @@ const CartDetails = () => {
   const { cartItems } = useContext(CartContext);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
+  // const item= true  //for testing other UI when there is items in carts
   const {showWarning} = useContext(ErrorContext)
   const [quantity, setQuantity] = useState(1); 
   const [location, setLocation] = useState('');
@@ -27,6 +28,8 @@ const CartDetails = () => {
   const discountedPrice = totalPrice * 0.5;
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  // buttons below carts details 
+const [activeTab, setActiveTab] = useState("OverView");
   const navigate = useNavigate()
   const handleBuyNow = () => {
       const { title, brand, imageSrc } = item;
@@ -108,6 +111,32 @@ const CartDetails = () => {
   const handleSChange = (event) => {
       setSublocation(event.target.value);
   };
+
+
+
+const content = {
+  OverView: [
+    "Available in a wide range of colors, patterns, and themes to appeal to kids.",
+    "Rubber outsoles with good traction to prevent slips and falls.",
+    "Built-in arch support to help maintain healthy foot development.",
+    "Soft insoles and adequate padding to support growing feet."
+  ],
+  Description: [
+    "Made with high-quality materials for durability.",
+    "Designed to provide maximum comfort.",
+    "Perfect for casual and outdoor use."
+  ],
+  Warranty: [
+    "1-year manufacturer's warranty.",
+    "Covers any manufacturing defects.",
+    "Does not include wear and tear or accidental damage."
+  ],
+  Review: [
+    "User feedback: 4.5/5 stars.",
+    "Customers praised its comfort and design.",
+    "Highly recommended for kids."
+  ]
+};
 
   return (
     <>
@@ -606,7 +635,9 @@ const CartDetails = () => {
                     marginLeft: "8px", // Optional: Adds space between the text and the button
                   }}
                   startIcon={<ShoppingBag />}
-                  onClick={()=>showWarning(`${item?.title} is already in cart`)}
+                  onClick={() =>
+                    showWarning(`${item?.title} is already in cart`)
+                  }
                 >
                   Add to cart
                 </Button>
@@ -743,8 +774,75 @@ const CartDetails = () => {
             </Card>
           </Box>
         </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            backgroundColor: "#fff",
+            border: "1px solid #C1C1C1",
+            flexDirection: "column",
+            borderRadius: "12px",
+            width: "1000px",
+          }}
+          mb={6}
+          ml={4}
+          mt={4}
+          p={6}
+        >
+          <Card
+            // key={index}
+            sx={{
+              borderRadius: "16px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              boxShadow: "none",
+              alignItems: "center",
+              marginBottom: "14px",
+            }}
+          >
+            <Box display={"flex"} justifyContent={"space-between"} gap={3}>
+              {["OverView", "Description", "Warranty", "Review"].map(
+                (method) => (
+                  <Button
+                    key={method}
+                    onClick={() => setActiveTab(method)}
+                    sx={{
+                      width: "180px",
+                      height: "44px",
+                      borderRadius: "22px",
+                      textTransform: "none",
+                      border: "1px solid #C1C1C1",
+                      backgroundColor:
+                        activeTab === method ? "#FEA301" : "white",
+                      color: activeTab === method ? "white" : "black",
+                      fontWeight: "bold",
+                      "&:hover": { backgroundColor: "#E89001" },
+                    }}
+                  >
+                    {method}
+                  </Button>
+                )
+              )}
+            </Box>
+          </Card>
+          <Box
+            sx={{
+              display: "flex",
+              borderRadius: "6px",
+              fontFamily: "Poppins",
+              fontSize: "18px",
+            }}
+          >
+            <ul>
+              {content[activeTab].map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </Box>
+        </Box>
       </Box>
-      <ErrorMessage/>
+      <ErrorMessage />
       <Footer />
     </>
   );
