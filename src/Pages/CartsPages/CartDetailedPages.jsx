@@ -19,7 +19,7 @@ const CartDetails = () => {
   const { cartItems } = useContext(CartContext);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const item = cartItems.find((item) => item.cartId === cartId);
-  const {showSuccess,showWarning} = useContext(ErrorContext)
+  const {showWarning} = useContext(ErrorContext)
   const [quantity, setQuantity] = useState(1); 
   const [location, setLocation] = useState('');
   const [sublocation, setSublocation] = useState('');
