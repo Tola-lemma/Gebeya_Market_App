@@ -54,7 +54,16 @@ const HeaderPage = () => {
     "Pyjamas",
     "Slippers",
   ];
+// register and sign in 
+  const [anchorEl, setAnchorEl] = useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <AppBar
       position="sticky"
@@ -106,8 +115,34 @@ const HeaderPage = () => {
           <Typography ml={{ lg: 1 }} fontSize={{ lg: 16 }}>
             Register/SignIn
           </Typography>
-          <KeyboardArrowDown sx={{ mr: { lg: 1 } }} />
+          <IconButton onClick={handleClick}>
+            <KeyboardArrowDown sx={{ mr: { lg: 1 },color:"black",fontWeight:"bold" }} />
+          </IconButton>
         </Box>
+         {/* Dropdown Menu  for sign in and register pages*/}
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <MenuItem
+          onClick={() => {
+            navigate("/");
+            handleClose();
+          }}
+        >
+          Register
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/");
+            handleClose();
+          }}
+        >
+          Sign In
+        </MenuItem>
+      </Menu>
         {/* Horizontal Navigation */}
         <Box
           sx={{
@@ -219,7 +254,7 @@ const HeaderPage = () => {
               transition: "transform 0.2s ease-in-out",
               "&:hover": {
                 backgroundColor: colors.background.primary,
-                transform: "scale(1.1)", 
+                transform: "scale(1.1)",
               },
             }}
           >
@@ -245,55 +280,57 @@ const HeaderPage = () => {
             <KeyboardArrowDown sx={{ mr: 2 }} />
           </Box>
           <IconButton onClick={() => setShowDropdown(!showDropdown)}>
-          <Badge
-            badgeContent={cartItems.length}
-            sx={{
-              "& .MuiBadge-badge": {
-                color: colors.background.white,
-                backgroundColor: colors.background.error,
-                right: 1,
-                top: 5,
-              },
-            }}
-          >
-            <StyledImage src={shopingIcon} height={44} width={44} />
-          </Badge>
+            <Badge
+              badgeContent={cartItems.length}
+              sx={{
+                "& .MuiBadge-badge": {
+                  color: colors.background.white,
+                  backgroundColor: colors.background.error,
+                  right: 1,
+                  top: 5,
+                },
+              }}
+            >
+              <StyledImage src={shopingIcon} height={44} width={44} />
+            </Badge>
           </IconButton>
           {showDropdown && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '60px',
-            right: '0',
-            width: '300px',
-            backgroundColor: 'white',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            zIndex: 10,
-          }}
-        >
-          {cartItems.length === 0 ? (
-            <Typography sx={{ padding: '16px' }}>Your cart is empty</Typography>
-          ) : (
-            cartItems.map((item) => (
-              <Box
-                key={item.cartId}
-                sx={{
-                  padding: '16px',
-                  borderBottom: '1px solid #ccc',
-                  cursor: 'pointer',
-                  '&:hover': { backgroundColor: '#f4f4f4' },
-                }}
-                onClick={() => {
-                  setShowDropdown(false);
-                  navigate(`/cart/${item.cartId}`);
-                }}
-              >
-                <Typography>{item.title}</Typography>
-              </Box>
-            ))
+            <Box
+              sx={{
+                position: "absolute",
+                top: "60px",
+                right: "0",
+                width: "300px",
+                backgroundColor: "white",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                zIndex: 10,
+              }}
+            >
+              {cartItems.length === 0 ? (
+                <Typography sx={{ padding: "16px" }}>
+                  Your cart is empty
+                </Typography>
+              ) : (
+                cartItems.map((item) => (
+                  <Box
+                    key={item.cartId}
+                    sx={{
+                      padding: "16px",
+                      borderBottom: "1px solid #ccc",
+                      cursor: "pointer",
+                      "&:hover": { backgroundColor: "#f4f4f4" },
+                    }}
+                    onClick={() => {
+                      setShowDropdown(false);
+                      navigate(`/cart/${item.cartId}`);
+                    }}
+                  >
+                    <Typography>{item.title}</Typography>
+                  </Box>
+                ))
+              )}
+            </Box>
           )}
-        </Box>
-      )}
         </Box>
       </StyledToolbar>
       {/* Mobile Menu Section: Expands Only When Toggled */}
