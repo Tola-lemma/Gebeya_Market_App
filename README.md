@@ -38,7 +38,18 @@ This project demonstrates a dynamic pricing calculation for an e-commerce checko
 - **Shipping Calculation:** 
 - **Tax Calculation:** Applies a 5% tax on the subtotal + shipping.
 - **Total Calculation:** Automatically updates based on price, shipping, and tax.
+## Checkout Pages
+## Not filling Neccessary fields the following error displayed
+![Home Page](src/Assets/Screenshots/checkoutpage/fillingfield.png)
+# Error message 
+![Home Page](src/Assets/Screenshots/checkoutpage/error.png)
 
+# payment Method is conditional only active when triggered
+![Home Page](src/Assets/Screenshots/checkoutpage/paymentmethod.png)
+# Order Summary Upon filling all fields and choosing payment method
+![Home Page](src/Assets/Screenshots/checkoutpage/afterbtn%20clicked.png)
+# After Submit order
+![Home Page](src/Assets/Screenshots/checkoutpage/succus.png)
 ## Prerequisites
 
 - React
