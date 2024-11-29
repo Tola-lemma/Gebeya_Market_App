@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography, Button,Card,  Divider, FormControl,  TextField, Alert, Modal } from "@mui/material";
 import HeaderPage from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Stack from "@mui/material/Stack";
 import {  Grid } from "@mui/material";
 import { useLocation ,useNavigate} from "react-router-dom";
+import { ErrorContext } from "../../Components/ToastError/ErrorContext";
+import { ErrorMessage } from "../../Components/ToastError/ErrorMessage";
 const CheckOutPage = ()=>{
-   
+  const {showSuccess} = useContext(ErrorContext)
         const [formData, setFormData] = useState({
           name: "",
           address1: "",
@@ -64,6 +66,7 @@ const CheckOutPage = ()=>{
           const handleSubmitOrder = () => {
             setModalOpen(false);
             setAlertOpen(true);
+            showSuccess('Payment Ordered Successfully!.')
             setTimeout(() => {
               setAlertOpen(false);
               navigate('/');
@@ -519,6 +522,7 @@ const CheckOutPage = ()=>{
               </Box>
             </Card>
           </Box>
+          <ErrorMessage/>
           <Footer />
         </>
       );}
