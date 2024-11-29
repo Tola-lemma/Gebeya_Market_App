@@ -3,7 +3,7 @@ import { Box, Typography, Button,Card,  Divider, FormControl,  TextField, Alert,
 import HeaderPage from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Stack from "@mui/material/Stack";
-import {  Grid } from "@mui/material";
+import Grid  from "@mui/material/Grid2";
 import { useLocation ,useNavigate} from "react-router-dom";
 import { ErrorContext } from "../../Components/ToastError/ErrorContext";
 import { ErrorMessage } from "../../Components/ToastError/ErrorMessage";
@@ -167,7 +167,7 @@ const CheckOutPage = ()=>{
 
                       {/* City, State, ZIP Grid */}
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4}>
+                        <Grid item xs={12} sm={6} md={4} size={4}>
                           <TextField
                             fullWidth
                             label="City"
@@ -177,7 +177,7 @@ const CheckOutPage = ()=>{
                             onChange={handleChange}
                           />
                         </Grid>
-                        <Grid item xs={6} sm={3} md={4}>
+                        <Grid item xs={6} sm={3} md={4} size={4}>
                           <TextField
                             fullWidth
                             label="State"
@@ -187,7 +187,7 @@ const CheckOutPage = ()=>{
                             onChange={handleChange}
                           />
                         </Grid>
-                        <Grid item xs={6} sm={3} md={4}>
+                        <Grid item xs={6} sm={3} md={4} size={4}>
                           <TextField
                             fullWidth
                             label="ZIP"
@@ -487,7 +487,7 @@ const CheckOutPage = ()=>{
 
                   {/* Ex cvv */}
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item xs={12} sm={6} md={4} size={4}>
                       <TextField
                         fullWidth
                         label="MM"
@@ -497,7 +497,7 @@ const CheckOutPage = ()=>{
                         onChange={handleChange}
                       />
                     </Grid>
-                    <Grid item xs={6} sm={3} md={4}>
+                    <Grid item xs={6} sm={3} md={4} size={4}>
                       <TextField
                         fullWidth
                         label="YYY"
@@ -507,7 +507,7 @@ const CheckOutPage = ()=>{
                         onChange={handleChange}
                       />
                     </Grid>
-                    <Grid item xs={6} sm={3} md={4}>
+                    <Grid item xs={6} sm={3} md={4} size={4}>
                       <TextField
                         fullWidth
                         label="CVV"
