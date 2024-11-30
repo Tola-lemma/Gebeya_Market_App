@@ -79,15 +79,15 @@ const Collection  = ({card}) =>{
     <Box mt={6}>
       <Box
         sx={{
-          display: "flex",
+          display: {lg:"flex",xl:"flex",md:"flex",sm:"block",xs:"block"},
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Box ml={8}>
+        <Box ml={{lg:8,md:8,xl:8,sm:2,xs:2}}>
           <Typography
             color="initial"
-            sx={{ fontFamily: "Poppins", fontSize: "40px" }}
+            sx={{ fontFamily: "Poppins", fontSize: {lg:"40px",xl:"40px",md:"40px",xs:"30px",sm:"30px"} }}
           >
             Latest Collections
           </Typography>
@@ -119,7 +119,7 @@ const Collection  = ({card}) =>{
       {/* cards */}
       <Box
         sx={{
-          display: "flex",
+          display: {lg:"flex",md:"flex",xl:"flex",xs:"block",sm:"block"},
           justifyContent: "space-between",
           alignItems: "stretch", // Ensures cards stretch equally
           padding: "2px",
@@ -131,7 +131,7 @@ const Collection  = ({card}) =>{
           <Card
             key={index}
             sx={{
-              width: 430,
+              width: {lg:430,md:430,xl:430,xs:350,sm:350},
               height: 450,
               borderRadius: "16px",
               border: "1px solid #C1C1C1",
@@ -141,6 +141,7 @@ const Collection  = ({card}) =>{
               alignItems: "center",
               paddingBottom: "16px",
               position: "relative",
+              marginBottom:"4px"
             }}
           >
             <Box
@@ -149,7 +150,7 @@ const Collection  = ({card}) =>{
                 top: 20,
                 left: 20,
                 display: "flex",
-                gap: 35,
+                gap:{xl: 35,lg:35,md:35,xs:25,sm:25},
               }}
             >
               <Checkbox
@@ -207,7 +208,7 @@ const Collection  = ({card}) =>{
                 top: 270,
                 left: 20,
                 display: "flex",
-                gap: 29,
+                gap: {xl:29,lg:29,md:29,xs:18,sm:18},
               }}
             >
               <Box
