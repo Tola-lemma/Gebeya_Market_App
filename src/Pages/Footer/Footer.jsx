@@ -31,7 +31,7 @@ const Footer  = () =>{
   ];
   
   return (
-    <Box sx={{backgroundColor:"#882BEC",height:400,display:"flex",justifyContent:"space-between"}}>
+    <Box sx={{backgroundColor:"#882BEC",height:{lg:400,md:400,xl:400,xs:990,sm:990},display:{lg:"flex",xl:"flex",md:"flex",sm:"block",xs:"block"},justifyContent:"space-between"}}>
       <Box>
          <img src={footerImg} alt='footer images' width={221} height={223} style={{marginLeft:"4rem",marginTop:"3.5rem",cursor:"pointer"}} onClick={() => (window.location.href = "/")}/>
          <Box sx={{display:"flex",justifyContent:"space-evenly",color:"white",marginLeft:"4rem", cursor: 'pointer'}}>
@@ -42,9 +42,10 @@ const Footer  = () =>{
       </Box>
       <Box
       sx={{
-        display: 'flex',
+        display: {xs:'block',sm:"block",md:"flex",lg:"flex",xl:"flex"},
         gap: 8,
         marginRight: 10,
+        marginLeft:{xs:10,sm:10,md:0,lg:0,xl:0},
         marginTop: '5rem',
       }}
     >
