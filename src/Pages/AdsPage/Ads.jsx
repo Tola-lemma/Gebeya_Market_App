@@ -6,7 +6,7 @@ const Ads  = () =>{
   return (
     <Box
     sx={{
-      display: "flex",
+      display: {lg:"flex",md:"flex",xl:"flex",sm:"none",xs:"none"},
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
