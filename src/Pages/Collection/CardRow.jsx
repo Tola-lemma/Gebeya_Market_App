@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 const CardRow = ({ images, labels,marginT }) => (
       <Box
         sx={{
-          display: "flex",
+          display: {xs:"block",sm:"block",md:"flex",lg:"flex",xl:"flex"},
           justifyContent: "space-between",
           alignItems: "stretch",
           padding: "6px",
@@ -24,6 +24,7 @@ const CardRow = ({ images, labels,marginT }) => (
               justifyContent: "space-between",
               alignItems: "center",
               paddingBottom: "16px",
+              marginBottom:"6px"
             }}
           >
             {/* Image Section */}

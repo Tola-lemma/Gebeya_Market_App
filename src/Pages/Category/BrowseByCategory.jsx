@@ -42,21 +42,21 @@ const Category = () => {
       {/* Header and Controls */}
       <Box
         sx={{
-          display: "flex",
+          display: {xs:"block",sm:"block",md:"flex",lg:"flex",xl:'flex'},
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Box ml={8}>
+        <Box ml={{lg:8,md:8,xl:8,xs:4,sm:4}}>
           <Typography
             color="initial"
-            sx={{ fontFamily: "Poppins", fontSize: "40px" }}
+            sx={{ fontFamily: "Poppins", fontSize: {lg:"40px",md:"40px",xl:"40px",sm:"20px",xs:"20px"} }}
           >
             Browse by category
           </Typography>
         </Box>
         <Box
-          mr={12}
+          mr={{lg:12,xl:12,md:12,xs:2,sm:2}}
           display={"flex"}
           justifyContent={"space-between"}
           sx={{ gap: 3 }}
@@ -84,7 +84,7 @@ const Category = () => {
       {/* Category Cards */}
       <Box
         sx={{
-          display: "flex",
+          display: {lg:"flex",xl:"flex",md:"flex",xs:"block",sm:"block"},
           justifyContent: "space-between",
           alignItems: "stretch",
           padding: "6px",
@@ -105,6 +105,7 @@ const Category = () => {
               justifyContent: "space-between",
               alignItems: "center",
               paddingBottom: "16px",
+              marginBottom:"6px"
             }}
           >
             {/* Image Section */}

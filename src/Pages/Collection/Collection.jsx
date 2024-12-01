@@ -93,7 +93,7 @@ const Collection  = ({card}) =>{
           </Typography>
         </Box>
         <Box
-          mr={12}
+          mr={{lg:12,xl:12,md:12,xs:2,sm:2}}
           display={"flex"}
           justifyContent={"space-between"}
           sx={{ gap: 3 }}
