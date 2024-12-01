@@ -342,7 +342,7 @@ const Collection  = ({card}) =>{
         ))}
       </Box>
       {/* buttons  */}
-      <Box sx={{ display: "flex", gap:2,marginTop:"4rem" ,justifyContent:"space-evenly"}}>
+      <Box ml={{xs:10,sm:10,md:0,lg:0,xl:0}} sx={{ display: {lg:"flex",md:"flex",xl:"flex",xs:"block",sm:"block"}, gap:2,marginTop:"4rem" ,justifyContent:"space-evenly"}}>
       {buttons.map((btn, index) => (
         <Button
           key={index}
@@ -358,6 +358,7 @@ const Collection  = ({card}) =>{
             width: "190px",
             fontFamily: "Poppins",
             fontSize: "24px",
+            marginBottom:"6px",
             "&:hover": {
               backgroundColor: btn === activeButton
                 ? "#e68a00"
